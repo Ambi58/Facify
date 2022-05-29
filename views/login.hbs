@@ -1,0 +1,26 @@
+<h2><i class="fa-solid fa-robot"></i> Facify</h2>
+<div class="section">
+    <p class="lead">Get your users authenticated, simply.</p>
+</div>
+<div class="divider"></div>
+<div class="section">
+    {{#if messages.error}}
+    <b>{{messages.error}}</b>
+    {{/if}}
+    <form class="col s12" action="/login" method="POST">
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="email" type="email" class="validate" name="email" required>
+                <label for="email">Email</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="password" type="password" class="validate" name="password" required>
+                <label for="password">Password</label>
+            </div>
+        </div>
+        <button type="submit" class="btn pur darken-1">LOG IN</button>
+    </form>
+    <p>New to Facify? <a href="/register">Register</a></p>
+</div>

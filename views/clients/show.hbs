@@ -1,0 +1,17 @@
+<h3>{{client.name}}
+    <small>{{{editIcon client.user user client._id false}}}</small>
+</h3>
+<div class="row">
+    <div>
+        <div class="card note">
+            <div class="card-content center-align">
+                <div class="code-date">
+                    <span class="card-title">{{client.email}}</span>
+                    <span class="card-title">{{formatDate date 'MMMM Do YYYY, h:mm:ss a'}}</span>
+                </div>
+                <img src="/clients/images/{{client.image1Key}}" alt="" class="responsive-img user-img">
+                <img src="/clients/images/{{client.image2Key}}" alt="" class="responsive-img user-img">
+            </div>
+        </div>
+    </div>
+</div>

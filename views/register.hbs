@@ -1,0 +1,49 @@
+<h2><i class="fa-solid fa-robot"></i> Facify</h2>
+<div class="section">
+    <p class="lead">Get your users authenticated, simply.</p>
+</div>
+<div class="divider"></div>
+<div class="section">
+    <form action="/register" method="POST" class="col s12">
+        <div class="row">
+            <div class="input-field col s6">
+                <input id="first_name" name="first_name" type="text" class="validate">
+                <label for="first_name">First Name</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="last_name" name="last_name" type="text" class="validate">
+                <label for="last_name">Last Name</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="email" name="email" type="email" class="validate">
+                <label for="email">Email</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="password" name="password" type="password" class="validate" onkeyup='check();'>
+                <label for="password">Password</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="confirm_password" name="confirm_password" type="password" class="validate"
+                    onkeyup='check();'>
+                <label for="confirm_password">Confirm Password</label>
+            </div>
+        </div>
+        <span id='message'></span>
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="application_name" name="application_name" type="text" class="validate">
+                <label for="application_name">Application Name</label>
+            </div>
+        </div>
+        <button type="submit" class="btn pur darken-1">
+            REGISTER
+        </button>
+    </form>
+    <p>Already Registered? <a href="/login">Login</a></p>
+</div>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./css/style.css">
+    <script type="text/javascript" src="https://unpkg.com/webcam-easy/dist/webcam-easy.min.js"></script>
+    <title>Facify Demo</title>
+</head>
+
+<body>
+
+    <div class="container demo-container">
+        <div class="card">
+            <div class="card-content">
+                <h2><i class="fa-solid fa-robot"></i> Facify</h2>
+                <div class="section">
+                    <p class="lead">Get your users authenticated, simply.</p>
+                </div>
+                <h6>Demo Page</h6>
+                <span id="while-submit-message"></span>
+                <div class="divider"></div>
+                <div class="row">
+                    <form class="col s12" enctype="multipart/form-data" id="main_form">
+                        <div class="row">
+                            <div class="input-field">
+                                <input type="email" id="email" name="email" required>
+                                <label for="email">Email</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <video id="webcam" autoplay playsinline width="320" height="240"></video>
+                            <canvas id="canvas" class="d-none" width="320" height="240"></canvas>
+                        </div>
+                        <div class="row">
+                            <button type="button" class="btn" id="clickImg">Click Image</button>
+                        </div>
+                        <div class="row">
+
+                            <button type="submit" class="btn" id="submit-button">
+                                <span class="button__text">Submit</span>
+                            </button>
+                            <a href="/" class="btn orange">Dashboard</a>
+                        </div>
+                    </form>
+
+                </div>
+                <div id="loading"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        const webcamElement = document.getElementById('webcam');
+        const canvasElement = document.getElementById('canvas');
+        const submitBtn = document.getElementById('submit-button')
+        const whileSubmitMessage = document.getElementById('while-submit-message')
+        const webcam = new Webcam(webcamElement, 'user', canvasElement);
+        const clickImg = document.getElementById("clickImg")
+        let picture
+        clickImg.addEventListener("click", () => {
+            picture = webcam.snap();
+        })
+        webcam.start()
+            .then(result => {
+                console.log("webcam started");
+                picture = webcam.snap();
+            })
+            .catch(err => {
+                console.log(err);
+            });
+
+
+        const form = document.getElementById('main_form');
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            console.log('me here')
+            submitBtn.className = 'btn button--loading'
+            whileSubmitMessage.innerHTML = 'Please be patient, it may take a while to process your request'
+
+            const hostId = 'demo.facify@gmail.com'
+            const hostPwd = '$2b$10$BDxwmY3m78tq.l4LmrRk3ewgPwOg63nOjgJXsWua6po2kptbJGRz2'
+            const formData = new FormData(form);
+            const imgFile = dataURLtoFile(picture, 'testImg.png')
+            formData.append('hostId', hostId)
+            formData.append('hostPwd', hostPwd)
+            formData.append('curImg', imgFile)
+            const url = window.location.origin + '/demo'
+            fetch(url, {
+                method: 'POST',
+                body: formData
+            })
+                .then(res => res.json())
+                .then(res1 => {
+                    console.log("entered the html page")
+                    console.log(res1);
+                    submitBtn.className = 'btn'
+                    whileSubmitMessage.innerHTML = ''
+                    if (res1.authVal) {
+                        swal({
+                            title: res1.authMessage,
+                            icon: "success"
+                        })
+                    } else {
+                        swal({
+                            title: res1.authMessage,
+                            icon: "error"
+                        })
+                    }
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        });
+
+        const dataURLtoFile = (dataurl, filename) => {
+            const arr = dataurl.split(',')
+            const mime = arr[0].match(/:(.*?);/)[1]
+            const bstr = atob(arr[1])
+            let n = bstr.length
+            const u8arr = new Uint8Array(n)
+            while (n) {
+                u8arr[n - 1] = bstr.charCodeAt(n - 1)
+                n -= 1 // to make eslint happy
+            }
+            return new File([u8arr], filename, { type: mime })
+        }
+    </script>
+</body>
+
+</html>

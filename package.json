@@ -1,0 +1,39 @@
+{
+  "name": "facify",
+  "version": "1.0.0",
+  "description": "An authentication service based on face recognition",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app",
+    "dev": "nodemon app"
+  },
+  "author": "Ambi Kumari",
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.1140.0",
+    "axios": "^0.27.2",
+    "bcrypt": "^5.0.1",
+    "canvas": "^2.9.1",
+    "connect-mongo": "^4.6.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "express-flash": "0.0.2",
+    "express-handlebars": "^6.0.6",
+    "express-session": "^1.17.3",
+    "face-api.js": "^0.22.2",
+    "method-override": "^3.0.0",
+    "moment": "^2.29.3",
+    "mongoose": "^6.3.3",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.4",
+    "node-fetch": "^3.2.4",
+    "passport": "^0.5.3",
+    "passport-local": "^1.0.0",
+    "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "nodemon": "^2.0.16"
+  }
+}

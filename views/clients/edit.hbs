@@ -1,0 +1,43 @@
+<h3>Edit Clients</h3>
+<div class="row">
+    <form action="/clients/{{client._id}}?_method=PUT" method="POST" class="col s12" enctype="multipart/form-data">
+        <div class="row">
+            <div class="input-field">
+                <input type="text" id="name" name="name" value="{{client.name}}">
+                <label for="name">Name</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field">
+                <input type="email" id="email" name="email" value="{{client.email}}">
+                <label for="email">Email</label>
+            </div>
+        </div>
+
+        <div class="row file-field input-field">
+            <div class="btn">
+                <span>Upload Reference Image 1</span>
+                <input type="file" name="refImage1" id="refImage1" accept="image/jpg,image/jpeg,image/gif,image/png">
+            </div>
+            <div class="file-path-wrapper">
+                <input class="file-path validate" type="text">
+            </div>
+        </div>
+
+        <div class="row file-field input-field">
+            <div class="btn">
+                <span>Upload Reference Image 2</span>
+                <input type="file" name="refImage2" id="refImage2" accept="image/jpg,image/jpeg,image/gif,image/png">
+            </div>
+            <div class="file-path-wrapper">
+                <input class="file-path validate" type="text">
+            </div>
+        </div>
+
+        <div class="row">
+            <input type="submit" value="Save" class="btn">
+            <a href="/" class="btn orange">Cancel</a>
+        </div>
+    </form>
+</div>

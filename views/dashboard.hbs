@@ -1,0 +1,40 @@
+<h6>Dashboard</h6>
+<h3>Welcome {{name}}</h3>
+<div class="hide-password-text" id="password-text">{{password}}</div>
+<button class="btn-small" id="password-btn">Show Password</button>
+<p>Here are your clients</p>
+{{#if clients}}
+<table class="striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Created At</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each clients}}
+        <tr>
+            <td><a href="/clients/{{_id}}">{{name}}</a></td>
+            <td>{{email}}</td>
+            <td>{{formatDate createdAt 'MMMM Do YYYY, h:mm:ss a'}}</td>
+            <td>
+                <a href="/clients/edit/{{_id}}" class="btn btn-float">
+                    <i class="fas fa-edit"></i>
+                </a>
+
+                <form action="/clients/{{_id}}" method="POST" id="delete-form">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button class="btn red">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </form>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+{{else}}
+<p>You have not created any clients</p>
+{{/if}}
